@@ -15,8 +15,14 @@ class Meal extends Model implements TranslatableContract
     public $translatedAttributes = ['title', 'description'];
     protected $hidden = ['translations'];
 
+    protected $fillable = [
+        'category_id'
+    ];
+
     public function category()
     {
-        return $this->hasOne(Category::class);
+        return $this->belongsTo(Meal::class);
     }
+
+
 }

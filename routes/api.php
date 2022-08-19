@@ -68,12 +68,24 @@ Route::get('/meals', function() {
         ]);
    }
 
-   return Category::all();*/
+   return Category::all();
 
-   $meal_data = [
-    'en' => ['title' => "Title on english 5", 'description' => "English description 5"],
-    'fr' => ['title' => "Title on french 5", 'description' => "French description 5"]
-    ];
+   $categories = Category::all();
+
+   for($i = 21; $i < 31; $i++){
+        $p = rand(0, 99);
+        $category = $categories->random()->id;
+        Meal::create([
+            'category_id' => $p>25 ? $category : NULL,
+            'en' => ['title' => "Title on english ".strval($i), 'description' => "English description ".strval($i)],
+            'fr' => ['title' => "Title on french ".strval($i), 'description' => "French description ".strval($i)]
+        ]);
+   }*/
+   App::setlocale('fr');
+   //$category = Category::find(1)->meal;
+   $meals = Meal::find(5)->category;
+   return $meals;
+
 
 //Meal::create($meal_data);
 

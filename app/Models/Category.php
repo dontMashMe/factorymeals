@@ -18,4 +18,9 @@ class Category extends Model implements TranslatableContract
     ];
     public $timestamps = false;
 
+
+    public function meal()
+    {
+        return $this->hasOne(Category::class);
+    }
 }
