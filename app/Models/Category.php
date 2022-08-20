@@ -16,11 +16,12 @@ class Category extends Model implements TranslatableContract
     protected $fillable = [
         'slug'
     ];
+    protected $hidden = ['translations'];
     public $timestamps = false;
 
 
     public function meal()
     {
-        return $this->hasOne(Category::class);
+        return $this->hasOne(Meal::class);
     }
 }

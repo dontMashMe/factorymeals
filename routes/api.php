@@ -48,9 +48,9 @@ Route::get('/meals', function() {
    //App::setlocale('fr');
    //$meal->translate('fr')->title;
    
-   return $meal;*/
+   return $meal;
 
-    /*
+
    $category_data = [
     'slug' => "slug_predjelo",
     'en' => ['title' => "Predjelo mrcina na engleskom"],
@@ -68,7 +68,7 @@ Route::get('/meals', function() {
         ]);
    }
 
-   return Category::all();
+   //return Category::all();
 
    $categories = Category::all();
 
@@ -83,9 +83,8 @@ Route::get('/meals', function() {
    }*/
    App::setlocale('fr');
    //$category = Category::find(1)->meal;
-   $meals = Meal::find(5)->category;
+   $meals = Meal::where('id', 5)->with('category')->get();
    return $meals;
-
 
 //Meal::create($meal_data);
 
