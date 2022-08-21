@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Config;
+use App\Models\Language;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tag>
@@ -18,8 +18,7 @@ class TagFactory extends Factory
     public function definition()
     {
         
-        $locales = Config::get('translatable.locales');
-        //dd($locales);
+        $locales = Language::GetLocales();
         $my_data = [
             'slug' => str_replace(' ', '_', strtolower(fake()->name()))
         ];

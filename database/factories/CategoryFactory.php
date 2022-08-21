@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Config;
+use App\Models\Language;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
@@ -19,7 +19,7 @@ class CategoryFactory extends Factory
     public function definition()
     {
 
-        $locales = Config::get('translatable.locales');
+        $locales = Language::GetLocales();
         //dd($locales);
         $my_data = [
             'slug' => str_replace(' ', '_', strtolower(fake()->name()))

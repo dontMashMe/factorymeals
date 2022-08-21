@@ -4,7 +4,8 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Seeder;
-use Config;
+use App\Models\Language;
+
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Ingredient>
@@ -19,8 +20,7 @@ class IngredientFactory extends Factory
     public function definition()
     {
         
-        $locales = Config::get('translatable.locales');
-        //dd($locales);
+        $locales = Language::GetLocales();        //dd($locales);
         $my_data = [
             'slug' => str_replace(' ', '_', strtolower(fake()->name()))
         ];

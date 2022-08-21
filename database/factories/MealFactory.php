@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Config;
+use App\Models\Language;
 use App\Models\Category;
 
 /**
@@ -18,7 +18,7 @@ class MealFactory extends Factory
      */
     public function definition()
     {
-        $locales = Config::get('translatable.locales');
+        $locales = Language::GetLocales();
         $p = mt_rand(0, 99);
         $my_data = [
             // 75% chance of attaching the category ID, else NULL

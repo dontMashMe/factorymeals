@@ -2,10 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Models\Tag;
-use App\Models\Meal;
-use App\Models\Category;
-use App\Http\Resources\MealResource;
+//use App\Http\Resources\MealResource;
+use App\Http\Controllers\MealController;
+
 //use Config;
 
 /*
@@ -24,11 +23,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-//Route::get('/meals'. [MealController::class]);
+Route::get('/meals', [MealController::class, 'get'])->name('meals');
 
 // test route
 Route::get('/test', function() {
-    return MealResource::collection(Meal::all());
+    //return MealResource::collection(Meal::all());
       /*
     $locales = Config::get('translatable.locales');
     $my_data = [
@@ -45,7 +44,7 @@ Route::get('/test', function() {
     $tag_data = [
         'slug' => "cc",
         'en' => ['title' => "Title on englishccc"],
-        'fr' => ['title' => "Title on fr*nch"],
+        'fr' => ['title' => "Title on frnch"],
     ];
      
     //Tag::create($tag_data);
