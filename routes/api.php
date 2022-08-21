@@ -98,9 +98,13 @@ Route::get('/meals', function() {
    //$category = Category::find(1)->meal;
    $meals = Meal::where('id', 5)->with('category')->get();
    return $meals;*/
-   App::setlocale('hr');
-   $cates = Category::all();
-   return $cates;
+   App::setlocale('en');
+   //$cates = Category::all();
+   //return $cates;
+   $meals = Meal::with('category')->get();
+   return $meals;
+
+
 
 //Meal::create($meal_data);
 

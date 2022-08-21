@@ -13,7 +13,7 @@ class Meal extends Model implements TranslatableContract
     use Translatable;
 
     public $translatedAttributes = ['title', 'description'];
-    protected $hidden = ['translations'];
+    protected $hidden = ['translations', 'category_id', 'created_at', 'updated_at'];
 
     protected $fillable = [
         'category_id'
@@ -26,12 +26,12 @@ class Meal extends Model implements TranslatableContract
 
     public function ingredients()
     {
-        return $this->belongsToMany(Ingredient::class);
+        return $this->belongsToMany(Ingredient::class, 'ingredient_meals');
     }
 
     public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class, 'meal_tags');
     }
     
 
