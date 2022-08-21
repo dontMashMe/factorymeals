@@ -13,6 +13,7 @@ class Ingredient extends Model implements TranslatableContract
     use Translatable;
 
     public $translatedAttributes = ['title'];
+    public $timestamps = false;
     protected $fillable = [
         'slug'
     ];

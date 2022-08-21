@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Tag;
 use App\Models\Meal;
 use App\Models\Category;
+//use Config;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // test route
 Route::get('/meals', function() {
-    /*
+      /*
+    $locales = Config::get('translatable.locales');
+    $my_data = [
+        'slug' => str_replace(' ', '_', strtolower(fake()->name()))
+    ];
+    foreach($locales as $locale){
+        $my_data[$locale] = [
+            'title' => strval(strtoupper($locale))."- "
+            .fake()->sentence($nbWords = 3, $variableNbWords = true)
+        ];
+    }
+    return $my_data;
+  
     $tag_data = [
         'slug' => "cc",
         'en' => ['title' => "Title on englishccc"],
@@ -81,10 +94,13 @@ Route::get('/meals', function() {
             'fr' => ['title' => "Title on french ".strval($i), 'description' => "French description ".strval($i)]
         ]);
    }*/
-   App::setlocale('fr');
+   /*
    //$category = Category::find(1)->meal;
    $meals = Meal::where('id', 5)->with('category')->get();
-   return $meals;
+   return $meals;*/
+   App::setlocale('hr');
+   $cates = Category::all();
+   return $cates;
 
 //Meal::create($meal_data);
 
