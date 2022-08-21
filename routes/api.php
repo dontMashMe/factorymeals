@@ -101,7 +101,7 @@ Route::get('/meals', function() {
    App::setlocale('en');
    //$cates = Category::all();
    //return $cates;
-   $meals = Meal::with('category')->get();
+   $meals = Meal::with('ingredients', 'tags', 'category')->get();
    return $meals;
 
 

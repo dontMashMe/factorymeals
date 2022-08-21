@@ -13,6 +13,7 @@ class Tag extends Model implements TranslatableContract
     use HasFactory;
 
     public $translatedAttributes = ['title'];
+    protected $hidden = ['translations', 'pivot'];
     public $timestamps = false;
     protected $fillable = [
         'slug'
