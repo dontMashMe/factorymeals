@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Rule;
 
 class OneOrMultiple implements Rule
 {
-    protected $accepted_params = ["category", "ingredients", "tags"];
+    private $accepted_params = ["category", "ingredients", "tags"];
     /**
      * Create a new rule instance.
      *

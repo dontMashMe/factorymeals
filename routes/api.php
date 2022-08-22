@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/meals', [MealController::class, 'get'])->name('meals');
+Route::get('/meals', [MealController::class, 'get'])->middleware('paginate');
 
 // test route
 Route::get('/test', function() {

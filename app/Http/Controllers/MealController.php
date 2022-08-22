@@ -17,11 +17,26 @@ class MealController extends Controller
     {
         
         // set the locale
-        $this->_setlocale($request->lang);
+        $this->_setLocale($request->lang);
 
+        // return the payload
+        return $this->buildQuery($request);
+       
+        
+    }
+
+    public function _setLocale($locale)
+    {
+        App::setlocale($locale);
+    }
+
+    public function buildQuery($request)
+    {
         // pluck the optional filtering params out of URL
         $category = $request->input('category');
         $tags     = $request->input('tags');
+        $per_page = $request->input('per_page');
+        $page     = $request->input('page');
 
         // build the query and return collection.
         return MealResource::collection(
@@ -36,13 +51,9 @@ class MealController extends Controller
                 });
             })
             ->get()
-        
-        );
-        
-    }
+            ->toQuery()
+            ->paginate($per_page, ['*'], 'page', $page)
 
-    public function _setlocale($locale)
-    {
-        App::setlocale($locale);
+        );
     }
 }
