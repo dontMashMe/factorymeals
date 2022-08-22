@@ -21,6 +21,7 @@ class MealResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
+            'status' => $this->getStatus($request->diff_time),
             $this->mergeWhen(str_contains($request->with, "category"), [
                 'category' => new CategoryResource($this->category),    
             ]),
@@ -30,6 +31,7 @@ class MealResource extends JsonResource
             $this->mergeWhen(str_contains($request->with, "ingredients"), [
                 'ingredients' => IngredientResource::collection($this->ingredients)
             ]),
+   
             
         ];
     }

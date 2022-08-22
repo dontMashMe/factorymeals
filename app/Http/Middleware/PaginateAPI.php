@@ -45,7 +45,12 @@ class PaginateAPI
             unset($data['meta']['from']);
         }
 
-        $data['meta']['totalPages'] = $data['meta']['last_page'];
+        if (isset($data['meta']['totalPages'])){
+            $data['meta']['totalPages'] = $data['meta']['last_page'];
+        }else{
+            $data['meta']['totalPages'] = 0;
+        }
+        
         if (isset($data['meta']['last_page'])){
             unset($data['meta']['last_page']);
         }

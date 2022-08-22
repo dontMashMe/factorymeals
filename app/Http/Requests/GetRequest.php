@@ -55,6 +55,7 @@ class GetRequest extends FormRequest
             'per_page.integer'  => "Per_page param must be a number.",
             'page.integer'      => "Page param must be a number.",
             'tags.array'        => "Tags must be sent as a list. e.g &tags[]=1,2,3",
+            'diff_time.integer' => "Diff_time param must be a UNIX timestamp"
         ];
     }
 }

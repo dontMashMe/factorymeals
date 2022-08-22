@@ -50,6 +50,7 @@ class MealController extends Controller
                     $q->whereIn('id', $tags);
                 });
             })
+            ->withTrashed()
             ->get()
             ->toQuery()
             ->paginate($per_page, ['*'], 'page', $page)
