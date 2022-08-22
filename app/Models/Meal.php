@@ -14,7 +14,7 @@ class Meal extends Model implements TranslatableContract
 
     public $translatedAttributes = ['title', 'description'];
     protected $hidden = ['translations', 'category_id', 'created_at', 'updated_at'];
-
+    protected $softDelete = true;
     protected $fillable = [
         'category_id'
     ];
