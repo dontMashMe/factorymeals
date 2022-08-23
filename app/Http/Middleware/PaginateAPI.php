@@ -16,27 +16,23 @@ class PaginateAPI
      */
     public function handle(Request $request, Closure $next)
 	{
-        /**
-         * 
-         * 
-         *   "meta": {
-            "currentPage": 2,
-            "totalItems": 8,
-            "itemsPerPage": 5,
-            "totalPages": 2
-        },
-         */
+
 		$response = $next($request);
-
 		$data = $response->getData(true);
-
-		if (isset($data['links'])) {
-			unset($data['links']);
-		}
+        
+        //format links
 		if (isset($data['meta'], $data['meta']['links'])) {
 			unset($data['meta']['links']);
 		}
+        if (isset($data['links']['first'])){
+            unset($data['links']['first']);
+        }
+        if (isset($data['links']['last'])){
+            unset($data['links']['last']);
+        }
+        $data['links']['self'] = $request->fullUrl();
 
+        // hide path
         if (isset($data['meta']['path'])){
             unset($data['meta']['path']);
         }
@@ -45,6 +41,7 @@ class PaginateAPI
             unset($data['meta']['from']);
         }
 
+        // pagination related 
         if (isset($data['meta']['last_page'])){
             $data['meta']['totalPages'] = $data['meta']['last_page'];
         }else{
