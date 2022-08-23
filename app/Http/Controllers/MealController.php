@@ -19,6 +19,7 @@ class MealController extends Controller
         // set the locale
         $this->_setLocale($request->lang);
 
+    
         // return the payload
         return $this->buildQuery($request);
        
@@ -46,9 +47,12 @@ class MealController extends Controller
                 else $query->whereNull('category_id');
             })
             ->when($tags, function($query, $tags) {
-                $query->whereHas('tags', function($q) use($tags){
-                    $q->whereIn('id', $tags);
-                });
+                foreach(explode(",", $tags) as $tag_id)
+                {
+                    $query->whereHas('tags', function($q) use($tag_id){
+                        $q->where('id', $tag_id);
+                    });
+                }
             })
             ->withTrashed()
             ->get()
