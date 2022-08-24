@@ -36,7 +36,14 @@ class Meal extends Model implements TranslatableContract
     {
         return $this->belongsToMany(Tag::class, 'meal_tags');
     }
-
+    
+    /**
+     * getStatus
+     * Sets the 'status' attribute for the given obje
+     *
+     * @param  mixed $diff_time
+     * @return string
+     */
     public function getStatus($diff_time) : string
     {
         if (!isset($diff_time)) return "created";

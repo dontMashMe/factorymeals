@@ -19,17 +19,32 @@ class MealController extends Controller
         // set the locale
         $this->_setLocale($request->lang);
 
-
         // return the payload
         return $this->buildQuery($request);
 
     }
-
+    
+    /**
+     * _setLocale
+     *  Sets the locale of the App to the language provided 
+     *  through the 'lang' param in the URL. 
+     * @param  string $locale
+     * @return void
+     */
     public function _setLocale($locale)
     {
         App::setlocale($locale);
     }
-
+    
+    /**
+     * buildQuery
+     * Returns an instance of Meal collection query builder.
+     * Filters the collection with URL parameters.
+     * 
+     * Is called every time a /meals route is hit.
+     * @param  mixed $request
+     * @return QueryBuilder
+     */
     public function buildQuery($request)
     {
         // pluck the optional filtering params out of URL
@@ -38,8 +53,8 @@ class MealController extends Controller
         $per_page = $request->input('per_page');
         $page     = $request->input('page');
 
-        // build the query and return collection.
         return MealResource::collection(
+            //handle 'category' parameter, if it exists.
             Meal::when($category, function ($query, $category) {
                 if(is_numeric($category))
                 {
@@ -54,6 +69,7 @@ class MealController extends Controller
                     $query->whereNull('category_id');
                 } 
             })
+            //handle 'tags' parameter, if it exists.
             ->when($tags, function($query, $tags) {
                 // append multiple conditions to query to match for exactly each tag_id passed
                 foreach(explode(",", $tags) as $tag_id)
@@ -67,7 +83,6 @@ class MealController extends Controller
             ->get()
             ->toQuery()
             ->paginate($per_page, ['*'], 'page', $page)
-
         );
     }
 }

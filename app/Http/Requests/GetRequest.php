@@ -36,7 +36,7 @@ class GetRequest extends FormRequest
             'page'      => 'integer',
             'tags'      => [
                 'string',
-                'regex:/^[0-9,]*$/'
+                'regex:/^((^(?!,)|(?!^),)([0-9,]))+$/'
             ],
             'lang'      => [
                 'required',
