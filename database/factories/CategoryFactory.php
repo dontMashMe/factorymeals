@@ -18,7 +18,6 @@ class CategoryFactory extends Factory
     
     public function definition()
     {
-
         $locales = Language::GetLocales();
         //dd($locales);
         $my_data = [

@@ -19,7 +19,6 @@ class Category extends Model implements TranslatableContract
     protected $hidden = ['translations'];
     public $timestamps = false;
 
-
     public function meal()
     {
         return $this->hasOne(Meal::class);

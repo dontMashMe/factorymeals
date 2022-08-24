@@ -19,7 +19,6 @@ class IngredientFactory extends Factory
      */
     public function definition()
     {
-        
         $locales = Language::GetLocales();        //dd($locales);
         $my_data = [
             'slug' => str_replace(' ', '_', strtolower(fake()->name()))

@@ -18,6 +18,5 @@ class MealSeeder extends Seeder
         Meal::factory()
         ->count(50)
         ->create();
-
     }
 }

@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
             MealSeeder::class,
             RecipesSeeder::class,
             DeleteMeals::class
-
         ]);
     }
 }

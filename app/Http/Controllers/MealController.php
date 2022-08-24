@@ -15,13 +15,11 @@ class MealController extends Controller
     
     public function get(GetRequest $request)
     {
-
         // set the locale
         $this->setAppLocale($request->lang);
 
         // return the payload
         return $this->buildQuery($request);
-
     }
     
     /**

@@ -17,7 +17,6 @@ class TagFactory extends Factory
      */
     public function definition()
     {
-        
         $locales = Language::GetLocales();
         $my_data = [
             'slug' => str_replace(' ', '_', strtolower(fake()->name()))

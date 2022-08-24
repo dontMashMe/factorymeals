@@ -30,9 +30,7 @@ class OneOrMultiple implements Rule
         if(!str_contains($value, ',')) {
             //if not, simply check if given value is in accepted params
             return in_array($value, $this->accepted_params);
-        }
-        else
-        {
+        } else {
             $param_vals = explode(",", $value);
             //if contains, explode the string to array, and check if all values are valid
             foreach($param_vals as $param) {        

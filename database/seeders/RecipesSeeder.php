@@ -20,7 +20,6 @@ class RecipesSeeder extends Seeder
      */
     public function run()
     {
-         
         //seed Meal-Tag
         $tags = Tag::all();
         Meal::all()->each(function($meal) use ($tags) {

@@ -26,7 +26,6 @@ class GetRequest extends FormRequest
      */
     public function rules()
     {
-        
         return [
             // accept any number, NULL or !NULL
             'category'  => 'regex:/(?i)(^([0-9]+|NULL|\!NULL)$)/',
