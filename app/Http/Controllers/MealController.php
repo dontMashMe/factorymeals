@@ -15,15 +15,14 @@ class MealController extends Controller
     
     public function get(GetRequest $request)
     {
-        
+
         // set the locale
         $this->_setLocale($request->lang);
 
-    
+
         // return the payload
         return $this->buildQuery($request);
-       
-        
+
     }
 
     public function _setLocale($locale)
@@ -42,11 +41,21 @@ class MealController extends Controller
         // build the query and return collection.
         return MealResource::collection(
             Meal::when($category, function ($query, $category) {
-                if(is_numeric($category)) $query->where('category_id', $category);
-                elseif($category == "!NULL") $query->whereNotNull('category_id');
-                else $query->whereNull('category_id');
+                if(is_numeric($category))
+                {
+                    $query->where('category_id', $category);
+                } 
+                elseif($category == "!NULL") 
+                {
+                    $query->whereNotNull('category_id');
+                }
+                else
+                {
+                    $query->whereNull('category_id');
+                } 
             })
             ->when($tags, function($query, $tags) {
+                // append multiple conditions to query to match for exactly each tag_id passed
                 foreach(explode(",", $tags) as $tag_id)
                 {
                     $query->whereHas('tags', function($q) use($tag_id){
