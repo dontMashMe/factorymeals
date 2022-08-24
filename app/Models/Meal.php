@@ -62,8 +62,8 @@ class Meal extends Model implements TranslatableContract
         // if is soft deleted, and 'deleted_at' is greater than diff_time
         if (!empty($unix_deleted) && $diff_time > $unix_deleted) {
             $status = 'deleted';
-        // if diff_time is less than 'updated_at' and diff time is less than 'deleted_at'
-        } elseif (($unix_updated < $diff_time) && ($diff_time < $unix_deleted)) {
+        // if diff_time is greater than 'updated_at' and is different than 'created_at'
+        } elseif (($diff_time > $unix_updated) && ($unix_updated != $unix_created)) {
             $status = 'modified';
         // if else fails, 'created'
         } else {
