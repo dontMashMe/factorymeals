@@ -50,24 +50,23 @@ class Meal extends Model implements TranslatableContract
      */
     public function getStatus($diff_time) : string
     {
-        if (!isset($diff_time)) return "created";
+        if (!isset($diff_time)) {
+            return "created";
+        } 
         
         $unix_created = strtotime($this->created_at);
         $unix_deleted = strtotime($this->deleted_at);
         $unix_updated = strtotime($this->updated_at);
         
         $status = "";
-
-        if( !empty($unix_deleted) && $diff_time > $unix_deleted)
-        {
+        // if is soft deleted, and 'deleted_at' is greater than diff_time
+        if (!empty($unix_deleted) && $diff_time > $unix_deleted) {
             $status = 'deleted';
-        }
-        elseif(($unix_updated < $diff_time) && ($diff_time < $unix_deleted))
-        {
+        // if diff_time is less than 'updated_at' and diff time is less than 'deleted_at'
+        } elseif (($unix_updated < $diff_time) && ($diff_time < $unix_deleted)) {
             $status = 'modified';
-        }
-        else
-        {
+        // if else fails, 'created'
+        } else {
             $status = 'created';
         }
         
