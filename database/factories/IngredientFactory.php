@@ -30,7 +30,7 @@ class IngredientFactory extends Factory
             'fr' => ['title' => $fr.strval($i)],
         ]);
         */
-        foreach($locales as $locale){
+        foreach($locales as $locale) {
             $my_data[$locale] = [
                 'title' => strval(strtoupper($locale))."- "
                 .fake()->sentence($nbWords = 3, $variableNbWords = true)

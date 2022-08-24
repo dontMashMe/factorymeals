@@ -17,8 +17,7 @@ class LanguageSeeder extends Seeder
     public function run()
     {
         $locales = Config::get('translatable.locales');
-        foreach($locales as $locale)
-        {
+        foreach($locales as $locale) {
             Language::create([
                 'locale' => $locale
             ]);

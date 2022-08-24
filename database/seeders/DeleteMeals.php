@@ -16,11 +16,9 @@ class DeleteMeals extends Seeder
     public function run()
     {
          //soft delete some records
-         foreach(Meal::all() as $meal)
-         {
+         foreach(Meal::all() as $meal) {
             $p = mt_rand(0, 99);
-            if ($p < 25)
-            {
+            if ($p < 25) {
                 print($meal->id);
                 $model = Meal::find($meal->id);
                 //dd($model);

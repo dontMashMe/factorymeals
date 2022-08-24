@@ -23,7 +23,7 @@ class RecipesSeeder extends Seeder
          
         //seed Meal-Tag
         $tags = Tag::all();
-        Meal::all()->each(function($meal) use ($tags){
+        Meal::all()->each(function($meal) use ($tags) {
             $meal->tags()->attach(
                 $tags->random(rand(1,3))->pluck('id')->toArray()
             );
@@ -31,7 +31,7 @@ class RecipesSeeder extends Seeder
 
         //seed Meal-Ingredient
         $ingreds = Ingredient::all();
-        Meal::all()->each(function($meal) use ($ingreds){
+        Meal::all()->each(function($meal) use ($ingreds) {
             $meal->ingredients()->attach(
                 $ingreds->random(rand(1,3))->pluck('id')->toArray()
             );

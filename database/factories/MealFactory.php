@@ -24,7 +24,7 @@ class MealFactory extends Factory
             // 75% chance of attaching the category ID, else NULL
             'category_id' => $p > 25 ? Category::factory()->create()->id : NULL
         ];
-        foreach($locales as $locale){
+        foreach($locales as $locale) {
             $my_data[$locale] = [
                 'title' => strval(strtoupper($locale))."- "
                         .fake()->sentence($nbWords = 3, $variableNbWords = true),

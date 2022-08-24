@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Language extends Model
 {
     use HasFactory;
+
     public $incrementing = false;
     protected $primaryKey = 'locale';
     protected $keyType = "string";
@@ -23,8 +24,7 @@ class Language extends Model
     public function scopeGetLocales() : array
     {
         $values = [];
-        foreach($this->all()->toArray() as $locale)
-        {
+        foreach($this->all()->toArray() as $locale) {
             array_push($values, $locale["locale"]);
         }
         return $values;

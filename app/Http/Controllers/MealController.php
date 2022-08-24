@@ -17,7 +17,7 @@ class MealController extends Controller
     {
 
         // set the locale
-        $this->_setLocale($request->lang);
+        $this->setAppLocale($request->lang);
 
         // return the payload
         return $this->buildQuery($request);
@@ -25,13 +25,14 @@ class MealController extends Controller
     }
     
     /**
-     * _setLocale
-     *  Sets the locale of the App to the language provided 
-     *  through the 'lang' param in the URL. 
+     * setAppLocale
+     * Sets the locale of the App to the language provided 
+     * by the 'lang' param in the URL. 
+     * 
      * @param  string $locale
      * @return void
      */
-    public function _setLocale($locale)
+    public function setAppLocale($locale)
     {
         App::setlocale($locale);
     }
@@ -56,24 +57,18 @@ class MealController extends Controller
         return MealResource::collection(
             //handle 'category' parameter, if it exists.
             Meal::when($category, function ($query, $category) {
-                if(is_numeric($category))
-                {
+                if(is_numeric($category)) {
                     $query->where('category_id', $category);
-                } 
-                elseif($category == "!NULL") 
-                {
+                } elseif($category == "!NULL") {
                     $query->whereNotNull('category_id');
-                }
-                else
-                {
+                } else {
                     $query->whereNull('category_id');
                 } 
             })
             //handle 'tags' parameter, if it exists.
             ->when($tags, function($query, $tags) {
-                // append multiple conditions to query to match for exactly each tag_id passed
-                foreach(explode(",", $tags) as $tag_id)
-                {
+                // append multiple conditions to the query to match for exactly each tag_id passed
+                foreach(explode(",", $tags) as $tag_id) {
                     $query->whereHas('tags', function($q) use($tag_id){
                         $q->where('id', $tag_id);
                     });

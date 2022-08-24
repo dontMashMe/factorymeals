@@ -57,13 +57,14 @@ class Meal extends Model implements TranslatableContract
         $unix_updated = strtotime($this->updated_at);
         
         $status = "";
-        if(($unix_updated < $diff_time) && ($diff_time < $unix_deleted))
-        {
-            $status = 'modified';
-        }
-        elseif( !empty($unix_deleted) && $diff_time > $unix_deleted)
+
+        if( !empty($unix_deleted) && $diff_time > $unix_deleted)
         {
             $status = 'deleted';
+        }
+        elseif(($unix_updated < $diff_time) && ($diff_time < $unix_deleted))
+        {
+            $status = 'modified';
         }
         else
         {
