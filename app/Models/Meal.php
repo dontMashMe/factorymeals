@@ -39,27 +39,29 @@ class Meal extends Model implements TranslatableContract
     
     /**
      * getStatus
-     * Sets the 'status' attribute for the given obje
-     *
-     * @param  mixed $diff_time
+     * Sets the 'status' attribute for the given Meal instance,
+     * based on the 'diff_time' parameter.
+     * 
+     * If the param 'status' is emitted from the request, returns "created".
+     * 
+     * 
+     * @param  integer $diff_time
      * @return string
      */
     public function getStatus($diff_time) : string
     {
         if (!isset($diff_time)) return "created";
         
-
         $unix_created = strtotime($this->created_at);
         $unix_deleted = strtotime($this->deleted_at);
         $unix_updated = strtotime($this->updated_at);
         
         $status = "";
-
-        if(($unix_updated > $diff_time) && ($unix_updated > $unix_created))
+        if(($unix_updated < $diff_time) && ($diff_time < $unix_deleted))
         {
             $status = 'modified';
         }
-        else if($unix_deleted > $diff_time)
+        elseif( !empty($unix_deleted) && $diff_time > $unix_deleted)
         {
             $status = 'deleted';
         }

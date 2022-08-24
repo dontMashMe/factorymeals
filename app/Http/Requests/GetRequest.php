@@ -30,10 +30,13 @@ class GetRequest extends FormRequest
         return [
             // accept any number, NULL or !NULL
             'category'  => 'regex:/(?i)(^([0-9]+|NULL|\!NULL)$)/',
-            'diff_time' => 'integer',
             'with'      => new OneOrMultiple(),
             'per_page'  => 'integer',
             'page'      => 'integer',
+            'diff_time' => [
+                'integer',
+                'gt:0'
+            ],
             'tags'      => [
                 'string',
                 'regex:/^((^(?!,)|(?!^),)([0-9,]))+$/'

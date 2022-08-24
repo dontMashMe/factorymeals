@@ -20,8 +20,9 @@ class DatabaseSeeder extends Seeder
             IngredientSeeder::class,
             TagSeeder::class,
             MealSeeder::class,
-            DeleteMeals::class,
-            RecipesSeeder::class
+            RecipesSeeder::class,
+            DeleteMeals::class
+
         ]);
     }
 }

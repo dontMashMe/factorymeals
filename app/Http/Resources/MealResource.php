@@ -26,13 +26,11 @@ class MealResource extends JsonResource
                 'category' => new CategoryResource($this->category),    
             ]),
             $this->mergeWhen(str_contains($request->with, "tags"), [
-                'tag' => TagResource::collection($this->tags)
+                'tags' => TagResource::collection($this->tags)
             ]),
             $this->mergeWhen(str_contains($request->with, "ingredients"), [
                 'ingredients' => IngredientResource::collection($this->ingredients)
-            ]),
-   
-            
+            ])
         ];
     }
 }
