@@ -52,6 +52,9 @@ class MealController extends Controller
         $per_page = $request->input('per_page');
         $page     = $request->input('page');
 
+        $time = new \DateTime();
+        $time->setTimestamp($request->input('diff_time'));
+
         return MealResource::collection(
             //handle 'category' parameter, if it exists.
             Meal::when($category, function ($query, $category) {
@@ -73,6 +76,9 @@ class MealController extends Controller
                 }
             })
             ->withTrashed()
+                ->where('created_at', '>', $time)
+                ->orWhere('updated_at', '>', $time)
+                ->orWhere('deleted_at', '>', $time)
             ->get()
             ->toQuery()
             ->paginate($per_page, ['*'], 'page', $page)
