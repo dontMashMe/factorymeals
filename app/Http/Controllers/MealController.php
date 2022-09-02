@@ -76,6 +76,7 @@ class MealController extends Controller
             ->get()
             ->toQuery()
             ->paginate($per_page, ['*'], 'page', $page)
+            ->withQueryString()
         );
     }
 }
